@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import { RootNavigation } from './src/navigation/Container';
 
 export const App: React.FC = () => {
-  return <View>
-    <Text>Here</Text>
-  </View>;
+  return <RootNavigation />;
 };
+
