@@ -1,4 +1,4 @@
-import { MENU } from '@src/helpers';
+import { MENU } from '@src/utils';
 import React from 'react';
 import { MenuItem } from './MenuItem';
 
