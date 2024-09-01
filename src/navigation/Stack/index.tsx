@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from '../../screens';
-import { Colors } from '../../theme';
+import { ThemeColors } from '../../theme';
 
 const Stack = createStackNavigator<StackNavigationRoutes>();
 
@@ -10,7 +10,7 @@ export const NavigatorStack = () => {
         headerShown: false,
         animationEnabled: true,
         cardStyle: {
-            backgroundColor: Colors.main,
+            backgroundColor: ThemeColors.main,
         },
     }}>
         <Stack.Screen name="home" component={HomeScreen} />

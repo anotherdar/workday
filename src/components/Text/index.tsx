@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text as NativeText, TextStyle } from 'react-native';
-import { Colors, Sizes, addColor, addFontWeight, fontSize } from '../../theme';
+import { ThemeColors, Sizes, addColor, addFontWeight, fontSize } from '../../theme';
 
 type TextType = React.FC<React.PropsWithChildren<TextProps>>;
 
 export const Text: TextType = (props) => {
-    const { children, color = Colors.text, fontWeight = 'bold', size = 'default' } = props;
+    const { children, color = ThemeColors.text, fontWeight = 'bold', size = 'default' } = props;
     return (
         <NativeText style={[
             addColor(color, 'color'),
@@ -16,7 +16,7 @@ export const Text: TextType = (props) => {
 };
 
 export interface TextProps {
-    color?: typeof Colors & string,
+    color?: typeof ThemeColors & string,
     fontWeight?: TextStyle['fontWeight'],
     size?: Sizes | number
 }

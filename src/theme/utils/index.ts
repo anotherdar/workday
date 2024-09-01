@@ -1,4 +1,4 @@
-import { Colors } from '../Colors/index';
+import { ThemeColors } from '../Colors/index';
 import {
     DimensionValue,
     FlexStyle,
@@ -68,7 +68,7 @@ export const sizes = {
     sm: 8,
     md: 12,
     normal: 16,
-    extra: 18,
+    extra: 20,
     default: 24,
     xl: 32,
     '1xl': 44,
@@ -264,7 +264,7 @@ export function addMargin(type: MarginTypes, margin: Sizes, size?: number) {
 export function addBorder(
     size: number,
     type: BorderWidth = 'border',
-    color: string = Colors.text,
+    color: string = ThemeColors.text,
 ) {
     const borderType = `${type}Width`;
     const borderColor = `${type}Color`;

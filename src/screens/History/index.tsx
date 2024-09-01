@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import { addColor } from '../../theme/utils';
-import { Colors } from '../../theme';
+import { ThemeColors } from '../../theme';
 
 
 export const HistoryScreen = () => {
   return (
     <View>
-        <Text style={[addColor(Colors.text)]}>History</Text>
+        <Text style={[addColor(ThemeColors.text)]}>History</Text>
     </View>
   );
 };
