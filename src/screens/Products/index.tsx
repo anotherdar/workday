@@ -1,27 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, View } from 'react-native';
-import { Navbar, SearchBox } from '@src/components';
+import React, { useState } from 'react';
+import { SafeAreaView, View, FlatList } from 'react-native';
+import { Expand, Navbar, SearchBox, Text } from '@src/components';
 import { addPadding, orientation } from '@src/theme';
-import { getAllProducts } from '@src/db';
+import { useProducts } from '@src/hooks';
 
 export const ProductScreen = () => {
   const [query, setQuery] = useState('');
+  const {products} = useProducts();
 
   function searchSellerByQuery(text: string) {
     setQuery(text);
   }
-
-  useEffect(() => {
-    async function init() {
-      // createProduct('pan riso');
-
-      const products = await getAllProducts();
-
-      console.log('>>>>', products);
-    }
-
-    init();
-  }, []);
 
   return (
     <SafeAreaView style={[orientation.full]}>
@@ -34,6 +23,14 @@ export const ProductScreen = () => {
       ]}>
         {/*  */}
         <SearchBox onChangeText={searchSellerByQuery} value={query} placeHolder="Buscar productos" />
+        <Expand />
+        <FlatList
+          data={products}
+          keyExtractor={(item) => item.id}
+          renderItem={({item}) => {
+            return <Text>{item.name}</Text>;
+          }}
+        />
       </View>
     </SafeAreaView>
   );
