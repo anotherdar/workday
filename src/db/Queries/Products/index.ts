@@ -4,13 +4,11 @@ import { Product } from '../../Models';
 // get all the products
 export async function getAllProducts() {
     try {
-        const products = await database.collections.get<Product>('products').query().fetch();
-
-        // const products = await database
-        //     .collections
-        //     .get<Product>('products')
-        //     .query()
-        //     .fetch();
+        const products = await database
+            .collections
+            .get<Product>('products')
+            .query()
+            .fetch();
 
         return products;
     } catch (error) {
@@ -82,3 +80,4 @@ export async function deleteProduct(productId: string) {
         console.log('Unable to complete this operation', error);
     }
 }
+
