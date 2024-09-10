@@ -7,3 +7,5 @@ export * from './SearchBox';
 export * from './ListItem';
 export * from './FAB';
 export * from './Empty';
+export * from './BottomSheet';
+export * from './IconButton';

@@ -2,11 +2,13 @@ import React from 'react';
 import { SafeAreaView, View, FlatList } from 'react-native';
 import { Expand, ListItem, Navbar, SearchBox, FAB, Empty } from '@src/components';
 import { addPadding, orientation } from '@src/theme';
-import { useProducts } from '@src/hooks';
+import { useModals, useProducts } from '@src/hooks';
 import { isEmpty } from '@src/utils';
+import { ProductsModal } from './ProductsModal';
 
 export const ProductScreen = () => {
   const { products, query, searchProducts } = useProducts();
+  const { setIsVisible } = useModals();
 
   return (
     <SafeAreaView style={[orientation.full]}>
@@ -31,7 +33,9 @@ export const ProductScreen = () => {
           {isEmpty(products) && <Empty />}
         </View>
       </View>
-      <FAB onPress={() => { }} />
+      <FAB onPress={setIsVisible('product')} />
+
+      <ProductsModal />
     </SafeAreaView>
   );
 };
