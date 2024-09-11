@@ -2,16 +2,15 @@ import React from 'react';
 import { SafeAreaView, View, FlatList } from 'react-native';
 import { Expand, ListItem, Navbar, SearchBox, FAB, Empty } from '@src/components';
 import { addPadding, orientation } from '@src/theme';
-import { useModals, useProducts } from '@src/hooks';
+import { useModals, useNotifications, useProducts } from '@src/hooks';
 import { isEmpty } from '@src/utils';
 import { ProductsModal } from './ProductsModal';
 import { Product } from '@src/db';
-import { useNotificationStore } from '@src/store';
 
 export const ProductScreen = () => {
-  const { products, query, searchProducts, getProducts, setCurrentProduct, deleteProduct} = useProducts();
-  const { setNotification, notification } = useNotificationStore();
+  const { products, query, searchProducts, getProducts, setCurrentProduct, deleteProduct } = useProducts();
   const { setIsVisible } = useModals();
+  const { dismissNotification, displayNotification } = useNotifications();
 
   const setActualProduct = (product: Product) => {
     return () => {
@@ -23,9 +22,7 @@ export const ProductScreen = () => {
 
   const deleteCurrentProduct = (product: Product) => {
     return () => {
-
-      setNotification({
-        ...notification,
+      displayNotification({
         visible: true,
         type: 'asking',
         title: `Estas seguro que quieres eliminar ${product.name}?`,
@@ -34,11 +31,7 @@ export const ProductScreen = () => {
 
           await getProducts();
 
-          setNotification({
-            ...notification,
-            action: () => {},
-            visible: false,
-          });
+          dismissNotification();
         },
       });
 
@@ -70,7 +63,7 @@ export const ProductScreen = () => {
       </View>
       <FAB onPress={setIsVisible('product')} />
 
-      <ProductsModal refresh={getProducts}/>
+      <ProductsModal refresh={getProducts} />
     </SafeAreaView>
   );
 };
