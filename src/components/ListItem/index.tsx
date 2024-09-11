@@ -1,34 +1,45 @@
-import { addBorderRadius, addColor, addPadding, orientation, ThemeColors } from '@src/theme';
+import { addAlignItems, addBorderRadius, addColor, addJustifyContent, addMargin, addOrientation, addPadding, ThemeColors } from '@src/theme';
 import React from 'react';
-import { GestureResponderEvent, Pressable } from 'react-native';
+import { GestureResponderEvent, Pressable, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Expand } from '../Divider';
 import { Text } from '../Text';
+import { IconButton } from '../IconButton';
 
 export const ListItem: React.FC<ListItemProps> = (props) => {
-    const {name, onPress, icon} = props;
+    const {name, onDelete, onEdit, icon} = props;
 
     return (
         <Pressable
             style={[
-                orientation.row,
                 addPadding('extra'),
-                orientation.alignCenter,
                 addColor(ThemeColors.contrast),
                 addBorderRadius('sm'),
+                addMargin('marginBottom', 'md'),
+                addOrientation('row'),
+                addJustifyContent('space-between'),
+                addAlignItems('center'),
             ]}
-            onPress={onPress}
         >
-            <Icon name={icon || 'package-variant-closed'} size={24} color={ThemeColors.text} />
-            <Expand elementSize="sm" />
-            <Text size={'extra'} fontWeight={'500'}>{name}</Text>
+            <View style={[addOrientation('row'), addAlignItems('center')]}>
+                <Icon name={icon || 'package-variant-closed'} size={32} color={ThemeColors.text} />
+                <Expand elementSize="xs" />
+                <Text size={'extra'} fontWeight={'500'}>{name}</Text>
+            </View>
+
+            <View style={[addOrientation('row')]}>
+                {onEdit && <IconButton color={ThemeColors.primary} icon="pencil" onPress={onEdit}/>}
+                {(onEdit && onDelete) && <Expand elementSize="xs"/>}
+                {onDelete && <IconButton color={ThemeColors.danger} icon="delete" onPress={onDelete}/>}
+            </View>
         </Pressable>
     );
 };
 
 export interface ListItemProps {
     name: string,
-    onPress: (event: GestureResponderEvent) => void
+    onEdit?: (event: GestureResponderEvent) => void
+    onDelete?: (event: GestureResponderEvent) => void;
     icon?: string;
 }
 

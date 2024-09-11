@@ -4,7 +4,7 @@ import { immer } from 'zustand/middleware/immer';
 
 type State = {
     products: Product[];
-    current: Record<string, Object> | null;
+    current: Product | null;
 }
 
 type Actions = {

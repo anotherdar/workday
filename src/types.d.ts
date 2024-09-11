@@ -14,3 +14,11 @@ interface Menu {
     icon: string,
     route: AppRouteNames
 }
+
+interface Notification {
+    type?: 'success' | 'danger' | 'asking';
+    title: string;
+    visible: boolean;
+    action: () => void;
+    cancel: () => void;
+}

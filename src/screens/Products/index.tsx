@@ -5,10 +5,45 @@ import { addPadding, orientation } from '@src/theme';
 import { useModals, useProducts } from '@src/hooks';
 import { isEmpty } from '@src/utils';
 import { ProductsModal } from './ProductsModal';
+import { Product } from '@src/db';
+import { useNotificationStore } from '@src/store';
 
 export const ProductScreen = () => {
-  const { products, query, searchProducts } = useProducts();
+  const { products, query, searchProducts, getProducts, setCurrentProduct, deleteProduct} = useProducts();
+  const { setNotification, notification } = useNotificationStore();
   const { setIsVisible } = useModals();
+
+  const setActualProduct = (product: Product) => {
+    return () => {
+      setCurrentProduct(product);
+
+      setIsVisible('product', 'edit')();
+    };
+  };
+
+  const deleteCurrentProduct = (product: Product) => {
+    return () => {
+
+      setNotification({
+        ...notification,
+        visible: true,
+        type: 'asking',
+        title: `Estas seguro que quieres eliminar ${product.name}?`,
+        action: async () => {
+          await deleteProduct(product.id);
+
+          await getProducts();
+
+          setNotification({
+            ...notification,
+            action: () => {},
+            visible: false,
+          });
+        },
+      });
+
+    };
+  };
 
   return (
     <SafeAreaView style={[orientation.full]}>
@@ -27,7 +62,7 @@ export const ProductScreen = () => {
             data={products}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => {
-              return <ListItem name={item.name} onPress={() => { }} />;
+              return <ListItem name={item.name} onDelete={deleteCurrentProduct(item)} onEdit={setActualProduct(item)} />;
             }}
           />}
           {isEmpty(products) && <Empty />}
@@ -35,7 +70,7 @@ export const ProductScreen = () => {
       </View>
       <FAB onPress={setIsVisible('product')} />
 
-      <ProductsModal />
+      <ProductsModal refresh={getProducts}/>
     </SafeAreaView>
   );
 };

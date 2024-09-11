@@ -6,10 +6,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 export const IconButton: React.FC<IconButtonProps> = ({ icon, color, size, onPress }) => {
     const generateIcon = () => {
         return typeof icon === 'string' ?
-            <Icon name={icon} size={sizes.default} color={ThemeColors.text} /> : icon;
+            <Icon name={icon} size={sizes.default} color={color || ThemeColors.text} /> : icon;
     };
 
-    return <Pressable onPress={onPress} style={[[orientation.allCenter, createCircle(size || 42), addColor(color || ThemeColors.main)]]}>
+    return <Pressable onPress={onPress} style={[[orientation.allCenter, createCircle(size || 42), addColor(ThemeColors.main)]]}>
         {generateIcon}
     </Pressable>;
 };

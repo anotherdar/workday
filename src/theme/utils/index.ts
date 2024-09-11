@@ -169,6 +169,10 @@ export const orientation = StyleSheet.create({
     },
 });
 
+export function addOrientation(flexDirection: FlexStyle['flexDirection']) {
+    return { flexDirection };
+}
+
 /**
  * Util to add a font size
  * @param type one of {Sizes}

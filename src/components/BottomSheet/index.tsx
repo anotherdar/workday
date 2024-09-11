@@ -29,7 +29,7 @@ export const BottomSheet: FC<PropsWithChildren<BottomSheetProps>> = props => {
         ]}>
         <Pressable onPress={e => e.stopPropagation()}>
           {/* Header  */}
-          <View
+          {!props.disableHeader && <View
             style={[
               addColor(ThemeColors.contrast),
               addDirection('row'),
@@ -45,7 +45,7 @@ export const BottomSheet: FC<PropsWithChildren<BottomSheetProps>> = props => {
             </Text>
 
             <IconButton onPress={props.onDismiss} icon="close" />
-          </View>
+          </View>}
           {/*  */}
           <View
             style={[
@@ -62,8 +62,9 @@ export const BottomSheet: FC<PropsWithChildren<BottomSheetProps>> = props => {
 };
 
 export interface BottomSheetProps {
-  title: string;
+  title?: string;
   icon?: string | React.ReactNode;
   onDismiss: () => void;
   visible: boolean;
+  disableHeader?: boolean;
 }

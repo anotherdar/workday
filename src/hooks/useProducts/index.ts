@@ -1,11 +1,11 @@
-import { getAllProducts } from '@src/db';
+import { createProduct, deleteProduct, getAllProducts, updateProduct } from '@src/db';
 import { useProductStore } from '@src/store';
 import { isEmpty, search } from '@src/utils';
 import { useEffect, useState } from 'react';
 
 // products
 export function useProducts() {
-    const { current, products, setProducts } = useProductStore();
+    const { current, products, setProducts, setCurrentProduct } = useProductStore();
     const [query, setQuery] = useState<string>('');
 
     useEffect(() => {
@@ -35,10 +35,21 @@ export function useProducts() {
         }
     };
 
+    const getProducts = async () => {
+        const local = await getAllProducts();
+
+        setProducts(local);
+    };
+
     return {
         current,
         products,
         searchProducts,
+        getProducts,
         query,
+        setCurrentProduct,
+        createProduct,
+        deleteProduct,
+        updateProduct,
     };
 }
