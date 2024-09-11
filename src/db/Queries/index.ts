@@ -17,4 +17,6 @@
 // };
 
 export * from './Products';
+export * from './Sellers';
+
 
