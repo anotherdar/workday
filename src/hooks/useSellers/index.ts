@@ -18,7 +18,7 @@ export function useSeller() {
         fetchSellers();
     }, [setSellers]);
 
-    const searchProducts = async (name: string) => {
+    const searchSellers = async (name: string) => {
         try {
             setQuery(name);
 
@@ -44,7 +44,7 @@ export function useSeller() {
     return {
         current,
         sellers,
-        searchProducts,
+        searchSellers,
         getSellers,
         query,
         setCurrentSellers,

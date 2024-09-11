@@ -4,13 +4,13 @@ import { Seller } from '../../Models';
 // get all the seller
 export async function getAllSeller() {
     try {
-        const products = await database
+        const seller = await database
             .collections
-            .get<Seller>('seller')
+            .get<Seller>('sellers')
             .query()
             .fetch();
 
-        return products;
+        return seller;
     } catch (error) {
         console.error(error);
         return [];
@@ -20,7 +20,7 @@ export async function getAllSeller() {
 // get seller by id
 export async function getSellerById(id: string) {
     try {
-        const product = await database.collections.get<Seller>('seller').find(id);
+        const product = await database.collections.get<Seller>('sellers').find(id);
         return product;
     } catch (error) {
         return null;
@@ -33,7 +33,7 @@ export async function createSeller(name: string) {
         await database.write(async () => {
             await database
                 .collections
-                .get<Seller>('seller')
+                .get<Seller>('sellers')
                 .create(seller => {
                     seller.name = name;
                 });

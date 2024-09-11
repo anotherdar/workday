@@ -16,7 +16,7 @@ const notificationStore = create<State & Actions>()(
             action: () => {},
             cancel: () => set(state => {state.notification.visible = false;}),
             type: 'asking',
-            visible: true,
+            visible: false,
         },
         setNotification: (notification) =>
             set(state => {

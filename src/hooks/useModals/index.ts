@@ -3,8 +3,6 @@ import { useModalStore, MODAL_IDS, type ModalNames, type Mode } from '@src/store
 function useModals() {
     const {current, setCurrent} = useModalStore();
 
-    console.log({current});
-
     function isVisible() {
         return !!MODAL_IDS.find(id => id.includes(current.id));
     }
