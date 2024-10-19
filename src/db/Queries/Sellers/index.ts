@@ -20,8 +20,8 @@ export async function getAllSeller() {
 // get seller by id
 export async function getSellerById(id: string) {
     try {
-        const product = await database.collections.get<Seller>('sellers').find(id);
-        return product;
+        const seller = await database.collections.get<Seller>('sellers').find(id);
+        return seller;
     } catch (error) {
         return null;
     }

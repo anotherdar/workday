@@ -1,16 +1,16 @@
 // src/models/Transaction.ts
 import { Model } from '@nozbe/watermelondb';
-import { field, text, immutableRelation } from '@nozbe/watermelondb/decorators';
+import { field, text, relation } from '@nozbe/watermelondb/decorators';
 import {Seller} from './Seller';
 import {Product} from './Product';
 
 export class Transaction extends Model {
   static table = 'transactions';
 
-  @immutableRelation('sellers', 'seller_id')
+  @relation('sellers', 'seller_id')
   seller!: Seller;
 
-  @immutableRelation('products', 'product_id')
+  @relation('products', 'product_id')
   product!: Product;
 
   @field('quantity')

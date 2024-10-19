@@ -55,7 +55,7 @@ export const SellersScreens = () => {
             data={sellers}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => {
-              return <ListItem name={item.name} onDelete={deleteCurrentSeller(item)} onEdit={setActualSeller(item)} />;
+              return <ListItem icon="account" name={item.name} onDelete={deleteCurrentSeller(item)} onEdit={setActualSeller(item)} />;
             }}
           />}
           {isEmpty(sellers) && <Empty />}

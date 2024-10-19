@@ -7,10 +7,11 @@ import { Text } from '../Text';
 import { IconButton } from '../IconButton';
 
 export const ListItem: React.FC<ListItemProps> = (props) => {
-    const {name, onDelete, onEdit, icon} = props;
+    const {name, onDelete, onEdit, icon, onPress} = props;
 
     return (
         <Pressable
+            onPress={onPress}
             style={[
                 addPadding('extra'),
                 addColor(ThemeColors.contrast),
@@ -38,8 +39,9 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
 
 export interface ListItemProps {
     name: string,
-    onEdit?: (event: GestureResponderEvent) => void
+    onEdit?: (event: GestureResponderEvent) => void;
     onDelete?: (event: GestureResponderEvent) => void;
+    onPress?: (event: GestureResponderEvent) => void;
     icon?: string;
 }
 

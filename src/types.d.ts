@@ -1,4 +1,4 @@
-type AppRouteNames = 'home' | 'products' | 'workday' | 'sellers' | 'history';
+type AppRouteNames = 'home' | 'products' | 'workday' | 'sellers' | 'history' | 'detail';
 
 type StackNavigationRoutes = {
     home: undefined;
@@ -7,6 +7,10 @@ type StackNavigationRoutes = {
     workday: undefined;
     sellers: undefined;
     history: undefined;
+    detail: {
+        sellerId: string,
+        name: string,
+    };
 };
 
 interface Menu {
@@ -21,4 +25,13 @@ interface Notification {
     visible: boolean;
     action: () => void;
     cancel: () => void;
+}
+
+type WorkdayDetailsParams = {
+    sellerId: string
+    name: string,
+}
+
+type Search<T> = {
+    search: T
 }
